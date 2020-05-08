@@ -78,7 +78,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-            { !this.state.loading ? (
+            {!this.state.loading ? (
               <div>
                     {renderView(this.state.successfulMissions, "Successful Missions")}
                     {renderView(this.state.failedMissions, "Failed Missions")}
