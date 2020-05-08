@@ -12,6 +12,8 @@ function sortByMissionName(sortOnWho) {
 
 function renderView(data, heading) {
 
+    if (data.length === 0) throw new Error("renderView receiving empty data array.");
+
     return(
       <div>
           <hr/>
@@ -21,6 +23,7 @@ function renderView(data, heading) {
           <table>
                 <thead>
                   <tr>
+
                     <th>Flight number</th>
                     <th>Mission Name</th>
                     <th>Launch Year</th>
@@ -28,6 +31,8 @@ function renderView(data, heading) {
                     <th>Launch Site</th>
                     <th>Mission Patch Image</th>
                     <th>Mission Details</th>
+                    { !data[0].launch_success ? <th width="300px">Launch Failure Reasons</th> : <th></th> }
+
                   </tr>
                 </thead>
                 <tbody>
@@ -41,6 +46,7 @@ function renderView(data, heading) {
                     <td width="200px">{item.launch_site.site_name}</td>
                     <td width="200px"><img src={item.links.mission_patch} alt="Mission Patch" width="100px" height="100px"/></td>
                     <td width="300px">{item.details}</td>
+                    { !item.launch_success && item.launch_failure_details !== undefined ? <td width="300px">{item.launch_failure_details.reason}</td> : <td></td> }
               </tr>)
 
           })}
@@ -68,6 +74,7 @@ class App extends React.Component {
 
             this.setState({successfulMissions : response.data.filter((item) => item.launch_success)})
             this.setState({failedMissions : response.data.filter((item) => !item.launch_success)})
+            console.log(this.state.failedMissions);
             sortByMissionName(this.state.successfulMissions);
             sortByMissionName(this.state.failedMissions);
             this.setState({loading: false});
