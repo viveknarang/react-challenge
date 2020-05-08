@@ -74,7 +74,6 @@ class App extends React.Component {
 
             this.setState({successfulMissions : response.data.filter((item) => item.launch_success)})
             this.setState({failedMissions : response.data.filter((item) => !item.launch_success)})
-            console.log(this.state.failedMissions);
             sortByMissionName(this.state.successfulMissions);
             sortByMissionName(this.state.failedMissions);
             this.setState({loading: false});
