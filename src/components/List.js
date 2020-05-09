@@ -26,12 +26,14 @@ var List = (props) => {
                 </thead>
                 <tbody>
           {props.data.map((item) => {
+
+              let date = new Date(item.launch_date_local);
             
               return (<tr key={uuidv4()}>
                     <td>{item.flight_number}</td>
                     <td width="200px">{item.mission_name}</td>
                     <td width="200px">{item.launch_year}</td>
-                    <td width="200px">{item.launch_date_local}</td>
+                    <td width="200px">{`${date.getMonth()}-${date.getDate()}-${date.getFullYear()}`}</td>
                     <td width="200px">{item.launch_site.site_name_long}</td>
                     <td width="200px">{ item.links.mission_patch !== null ?<img src={item.links.mission_patch} alt="Mission Patch" width="100px" height="100px"/> : ""}</td>
                     <td width="300px">{item.details}</td>
