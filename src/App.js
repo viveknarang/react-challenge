@@ -22,16 +22,14 @@ function renderView(data, heading) {
           <table>
                 <thead>
                   <tr>
-
-                    <th>Flight number</th>
-                    <th>Mission Name</th>
-                    <th>Launch Year</th>
-                    <th>Launch Date</th>
-                    <th>Launch Site</th>
-                    <th>Mission Patch Image</th>
-                    <th>Mission Details</th>
-                    { !data[0].launch_success ? <th>Launch Failure Reasons</th> : <th></th> }
-
+                      <th>Flight number</th>
+                      <th>Mission Name</th>
+                      <th>Launch Year</th>
+                      <th>Launch Date</th>
+                      <th>Launch Site</th>
+                      <th>Mission Patch Image</th>
+                      <th>Mission Details</th>
+                      { !data[0].launch_success ? <th>Launch Failure Reasons</th>:<th></th> }
                   </tr>
                 </thead>
                 <tbody>
@@ -45,7 +43,7 @@ function renderView(data, heading) {
                     <td width="200px">{item.launch_site.site_name}</td>
                     <td width="200px">{ item.links.mission_patch !== null ?<img src={item.links.mission_patch} alt="Mission Patch" width="100px" height="100px"/> : ""}</td>
                     <td width="300px">{item.details}</td>
-                    { !item.launch_success && item.launch_failure_details !== undefined ? <td width="300px">{item.launch_failure_details.reason}</td> : <td></td> }
+                    { !item.launch_success && item.launch_failure_details !== undefined ? <td width="300px">{item.launch_failure_details.reason}</td>:<td></td> }
               </tr>)
 
           })}
@@ -66,36 +64,29 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
       this.setState({loading: true});
-
       axios.get(url).then((response) => {
-
             this.setState({successfulMissions : response.data.filter((item) => item.launch_success)})
             this.setState({failedMissions : response.data.filter((item) => !item.launch_success)})
             sortByMissionName(this.state.successfulMissions);
             sortByMissionName(this.state.failedMissions);
             this.setState({loading: false});
-
       }).catch((message) => {
             this.setState({issueWithEndPoint: true});
       });      
-
   }
 
   render() {
     return (
       <React.Fragment>
-
-            {!this.state.loading ? (
-              <div>
-                    {renderView(this.state.successfulMissions, "Successful Missions")}
-                    {renderView(this.state.failedMissions, "Failed Missions")}
-              </div>
-            ):(  
-              <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
-            )}
-
+        {!this.state.loading ? (
+          <div>
+            { this.state.successfulMissions.length !== 0 ? renderView(this.state.successfulMissions, "Successful Missions") : <div>No data available for successful missions</div>}
+            { this.state.failedMissions.length !== 0 ? renderView(this.state.failedMissions, "Failed Missions") : <div>No data available for failed missions</div>}
+          </div>
+        ):(  
+          <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
+        )}
       </React.Fragment>
     );
   }
