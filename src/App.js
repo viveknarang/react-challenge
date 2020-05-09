@@ -94,7 +94,7 @@ class App extends React.Component {
                     {renderView(this.state.failedMissions, "Failed Missions")}
               </div>
             ):(  
-            <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
+              <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
             )}
 
       </React.Fragment>
