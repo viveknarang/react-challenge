@@ -4,7 +4,7 @@ import axios from 'axios';
 import List from './components/List';
 import Message from './components/Message';
 
-const url = "https://api.spacexdata.com/v3/launchesXXX"
+const url = "https://api.spacexdata.com/v3/launches"
 
 const headerSuccessfulMissions = "Successful Missions"
 const headerFailedMissions = "Failed Missions"
