@@ -30,7 +30,7 @@ function renderView(data, heading) {
                     <th>Launch Site</th>
                     <th>Mission Patch Image</th>
                     <th>Mission Details</th>
-                    { !data[0].launch_success ? <th width="300px">Launch Failure Reasons</th> : <th></th> }
+                    { !data[0].launch_success ? <th>Launch Failure Reasons</th> : <th></th> }
 
                   </tr>
                 </thead>
