@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 var List = (props) => {
 
-    if (props.data.length === 0) throw new Error("renderView receiving empty data array.");
+    if (props.data.length === 0) throw new Error("List component receiving empty data array.");
 
     return(
       <div>
