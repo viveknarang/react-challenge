@@ -3,8 +3,7 @@ import './App.css';
 import axios from 'axios';
 const { v4: uuidv4 } = require('uuid');
 
-// Replace the below url with: "https://api.spacexdata.com/v3/launches"
-const url = "http://localhost:5000/launches"
+const url = "https://api.spacexdata.com/v3/launches"
 
 function sortByMissionName(sortOnWho) {
     sortOnWho.sort((a, b) => a.mission_name.localeCompare(b.mission_name));
