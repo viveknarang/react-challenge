@@ -5,6 +5,13 @@ const { v4: uuidv4 } = require('uuid');
 
 const url = "https://api.spacexdata.com/v3/launches"
 
+const headerSuccessfulMissions = "Successful Missions"
+const headerFailedMissions = "Failed Missions"
+const errorNoDataForSuccessfulMissions = "No data available for successful missions ..."
+const errorNoDataForFailedMissions = "No data available for failed missions ..."
+const errorProblemGettingData = "Problem getting data from the endpoint ..."
+const messageLoadingData = "Loading data please wait ..." 
+
 function sortByMissionName(sortOnWho) {
     sortOnWho.sort((a, b) => a.mission_name.localeCompare(b.mission_name));
 }
@@ -81,11 +88,11 @@ class App extends React.Component {
       <React.Fragment>
         {!this.state.loading ? (
           <div>
-            { this.state.successfulMissions.length !== 0 ? renderView(this.state.successfulMissions, "Successful Missions") : <div>No data available for successful missions</div>}
-            { this.state.failedMissions.length !== 0 ? renderView(this.state.failedMissions, "Failed Missions") : <div>No data available for failed missions</div>}
+               { this.state.successfulMissions.length !== 0 ? renderView(this.state.successfulMissions, headerSuccessfulMissions) : <div>{errorNoDataForSuccessfulMissions}</div>}
+               { this.state.failedMissions.length !== 0 ? renderView(this.state.failedMissions, headerFailedMissions) : <div>{errorNoDataForFailedMissions}</div>}
           </div>
         ):(  
-          <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
+          <span>{ this.state.issueWithEndPoint ? errorProblemGettingData : messageLoadingData }</span>  
         )}
       </React.Fragment>
     );
