@@ -47,7 +47,7 @@ function renderView(data, heading) {
                     <td width="200px">{item.mission_name}</td>
                     <td width="200px">{item.launch_year}</td>
                     <td width="200px">{item.launch_date_local}</td>
-                    <td width="200px">{item.launch_site.site_name}</td>
+                    <td width="200px">{item.launch_site.site_name_long}</td>
                     <td width="200px">{ item.links.mission_patch !== null ?<img src={item.links.mission_patch} alt="Mission Patch" width="100px" height="100px"/> : ""}</td>
                     <td width="300px">{item.details}</td>
                     { !item.launch_success && item.launch_failure_details !== undefined ? <td width="300px">{item.launch_failure_details.reason}</td>:<td></td> }
