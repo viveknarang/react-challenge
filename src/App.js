@@ -87,14 +87,16 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+
             {!this.state.loading ? (
               <div>
                     {renderView(this.state.successfulMissions, "Successful Missions")}
                     {renderView(this.state.failedMissions, "Failed Missions")}
               </div>
-            ):(
-                <span>Loading data please wait ...</span>  
+            ):(  
+            <span>{ this.state.issueWithEndPoint ? "Problem getting data from the endpoint ..." : "Loading data please wait ..." }</span>  
             )}
+
       </React.Fragment>
     );
   }
